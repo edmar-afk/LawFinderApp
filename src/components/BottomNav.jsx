@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
+
 function BottomNav() {
 	return (
 		<>
-			<div className="fixed z-50 w-[90%] h-14 -translate-x-1/2 bg-green-900 border border-green-200 rounded-full bottom-4 left-1/2">
+			<div className="fixed z-100 w-[90%] h-14 -translate-x-1/2 bg-green-900 border border-green-200 rounded-full bottom-4 left-1/2 shadow-lg">
 				<div className="grid h-full grid-cols-3 mx-auto">
 					<NavLink
 						to="/user-dashboard"

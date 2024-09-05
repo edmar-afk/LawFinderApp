@@ -1,5 +1,5 @@
 import BottomNav from "../components/BottomNav";import Header from "../components/userDashboard/Header";
-import LawFilter from "../components/userDashboard/LawFilter";
+import LawLists from "../components/userDashboard/LawLists";
 import Search from "../components/userDashboard/Search";
 import Welcome from "../components/userDashboard/Welcome";
 function UserDashboard() {
@@ -9,7 +9,7 @@ function UserDashboard() {
 				<Header />
                 <Welcome />
                 <Search />
-                <LawFilter/>
+                <LawLists/>
 			</div>
 			<BottomNav />
 		</>
