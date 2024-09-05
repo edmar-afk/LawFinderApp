@@ -1,16 +1,11 @@
-/* eslint-disable react/no-unescaped-entities */ import { useState, useEffect } from "react";import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import disasterIcon from "../assets/img/icon.png";
-import { motion } from "framer-motion";
+/* eslint-disable react/no-unescaped-entities */ import { useState, useEffect } from "react";import { Link, useNavigate, useLocation } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Swal from "sweetalert2";
 import api from "../assets/api";
-import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
+import logo from "../assets/img/icon.png";
+
 const Login = () => {
-	const [username, setUsername] = useState("");
+	const [username, setUsername] = useState(""); // Changed to username
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
@@ -24,7 +19,7 @@ const Login = () => {
 				title: location.state.successMessage,
 				showConfirmButton: false,
 				timer: 1500,
-				customClass: {
+				customClassName: {
 					title: "text-lg font-semibold text-xs",
 					icon: "p-2 rounded-full w-16 h-14",
 					popup: "bg-gray-100 rounded-lg shadow-md max-w-xs max-h-56",
@@ -38,7 +33,7 @@ const Login = () => {
 		setLoading(true);
 
 		try {
-			const res = await api.post("/api/token/", { username, password });
+			const res = await api.post("/api/token/", { username, password }); // Using username
 
 			if (res.status === 200) {
 				localStorage.setItem("ACCESS_TOKEN", res.data.access);
@@ -52,7 +47,7 @@ const Login = () => {
 
 				localStorage.setItem("userData", JSON.stringify(userRes.data));
 
-				navigate("/resident-dashboard");
+				navigate("/user-dashboard");
 			} else {
 				Swal.fire({
 					title: "Error!",
@@ -80,118 +75,99 @@ const Login = () => {
 				className="p-3 flex items-center fixed top-14">
 				<ArrowBackIcon className="text-gray-800" />
 			</Link>
-			<div className="h-screen bg-white pt-12">
-				<div className="flex flex-col items-center justify-center mb-8 pt-24">
-					<img
-						src={disasterIcon}
-						className="w-40"
-						alt=""
-					/>
-					<motion.p
-						initial={{ scale: 0 }}
-						animate={{ scale: 1 }}
-						transition={{ type: "spring", stiffness: 160, damping: 30 }}
-						className="text-gray-800 font-bold text-4xl">
-						Login
-					</motion.p>
-				</div>
-				<Grid
-					container
-					component="main"
-					className="flex items-center justify-center">
-					<Grid
-						item
-						xs={12}
-						sm={8}
-						md={5}
-						component={Paper}
-						elevation={0}
-						square
-						className="flex flex-col items-center justify-center p-8 bg-transparent">
-						<form
-							className="w-full mt-1 bg-transparent"
-							onSubmit={handleSubmit}
-							noValidate>
-							<motion.div
-								initial={{ scale: 0 }}
-								animate={{ scale: 1 }}
-								transition={{ type: "spring", stiffness: 160, damping: 30 }}>
-								<TextField
-									onChange={(e) => setUsername(e.target.value)}
-									variant="outlined"
-									margin="normal"
-									required
-									fullWidth
-									className="mb-4 bg-transparent"
-									name="username"
-									label="Your Mobile Number"
-									type="number"
-									id="email"
-									autoComplete="off"
-								/>
-							</motion.div>
-							<motion.div
-								initial={{ scale: 0 }}
-								animate={{ scale: 1 }}
-								transition={{ type: "spring", stiffness: 160, damping: 30 }}>
-								<TextField
-									onChange={(e) => setPassword(e.target.value)}
-									variant="outlined"
-									margin="normal"
-									required
-									fullWidth
-									className="mb-4 bg-transparent"
-									name="password"
-									label="Password"
-									type="password"
-									id="password"
-									autoComplete="current-password"
-								/>
-							</motion.div>
-							<br />
-							<motion.div
-								initial={{ scale: 0 }}
-								animate={{ scale: 1 }}
-								transition={{ type: "spring", stiffness: 160, damping: 30 }}>
-								<Button
+			<section className="bg-white h-screen py-24">
+				<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+					<a
+						href="#"
+						className="flex items-center mb-6 text-2xl font-semibold text-gray-900">
+						<img
+							className="w-8 h-8 mr-2"
+							src={logo}
+							alt="logo"
+						/>
+						Law Finder
+					</a>
+					<div className="w-full bg-white rounded-lg md:mt-0 sm:max-w-md xl:p-0">
+						<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+							<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+								Login to your account
+							</h1>
+							<form
+								className="space-y-4 md:space-y-6"
+								onSubmit={handleSubmit}>
+								<div>
+									<label
+										htmlFor="username"
+										className="block mb-2 text-sm font-medium text-gray-900">
+										Mobile Number
+									</label>
+									<input
+										type="number" // Changed to text for username input
+										name="username"
+										id="username"
+										className="bg-gray-50 text-gray-900 rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 placeholder-gray-400"
+										placeholder="Enter your mobile number"
+										value={username}
+										onChange={(e) => setUsername(e.target.value)}
+										required
+									/>
+								</div>
+								<div>
+									<label
+										htmlFor="password"
+										className="block mb-2 text-sm font-medium text-gray-900">
+										Password
+									</label>
+									<input
+										type="password"
+										name="password"
+										id="password"
+										placeholder="••••••••"
+										className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 placeholder-gray-400"
+										value={password}
+										onChange={(e) => setPassword(e.target.value)}
+										required
+									/>
+								</div>
+
+								<button
 									type="submit"
-									fullWidth
-									variant="contained"
-									color="primary"
-									className="mt-8 mb-2 flex items-center justify-center"
-									disabled={loading}>
+									className="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-center items-center">
 									{loading ? (
-										<>
-											<HourglassBottomIcon className="animate-spin h-5 w-5 mr-3 text-white" />
-											Logging in...
-										</>
+										<svg
+											className="w-5 h-5 text-white animate-spin"
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24">
+											<circle
+												className="opacity-25"
+												cx="12"
+												cy="12"
+												r="10"
+												stroke="currentColor"
+												strokeWidth="4"></circle>
+											<path
+												className="opacity-75"
+												fill="currentColor"
+												d="M4 12a8 8 0 018-8v3.08a5 5 0 00-4.91 4.91H4z"></path>
+										</svg>
 									) : (
 										"Login"
 									)}
-								</Button>
-							</motion.div>
-							<motion.div
-								initial={{ scale: 0 }}
-								animate={{ scale: 1 }}
-								transition={{ type: "spring", stiffness: 160, damping: 30 }}>
-								<Grid
-									container
-									className="mt-2">
-									Don't Have an account?
-									<Grid item>
-										<Link
-											to="/register"
-											variant="body2"
-											className="ml-0.5 text-blue-400 font-bold">
-											Register here
-										</Link>
-									</Grid>
-								</Grid>
-							</motion.div>
-						</form>
-					</Grid>
-				</Grid>
-			</div>
+								</button>
+								<p className="text-sm font-light text-gray-500">
+									Don’t have an account yet?{" "}
+									<Link
+										to={"/register"}
+										className="font-medium text-green-600 hover:underline">
+										Register here
+									</Link>
+								</p>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
 		</>
 	);
 };

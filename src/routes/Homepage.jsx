@@ -4,7 +4,7 @@ import icon from "../assets/img/icon.png";
 function Homepage() {
 	return (
 		<>
-			<section className="pt-24 bg-gray-50 h-screen">
+			<section className="pt-24 bg-gray-50 h-full">
 				<div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 					<div className="text-center">
 						<p className="max-w-4xl mx-auto mb-4 text-4xl font-bold leading-tight text-gray-900 sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight">
@@ -20,20 +20,20 @@ function Homepage() {
 								src={icon}
 							/>
 						</div>
-						<div className="flex flex-row justify-evenly mt-9">
-							<a
-								href="#"
+						<div className="flex flex-row justify-evenly py-9">
+							<Link
+								to={'/login'}
 								title=""
 								className="inline-flex items-center mx-4 justify-center w-full px-8 py-3 text-sm font-bold text-white transition-all duration-200 bg-green-600 border-2 border-transparent sm:w-auto rounded-xl"
 								role="button">
 								Login
-							</a>
-							<a
-								href="#"
+							</Link>
+							<Link
+								to={'/user-dashboard'}
 								className="inline-flex items-center mx-4 justify-center w-full px-2 py-3 text-sm font-bold text-green-600 transition-all duration-200 bg-gray-100 border-2 border-green-600 sm:w-auto rounded-xl"
 								role="button">
 								Guest Login
-							</a>
+							</Link>
 						</div>
 					</div>
 				</div>

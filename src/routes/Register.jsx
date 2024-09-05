@@ -1,15 +1,14 @@
-import { useState, useEffect } from "react";import { Link, useNavigate } from "react-router-dom";
-import api from "../assets/api";
-import disasterIcon from "../assets/img/icon.png";
+import { useState, useEffect } from "react";import { Link, useNavigate } from "react-router-dom";import api from "../assets/api";
 import Swal from "sweetalert2";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
+import logo from '../assets/img/icon.png'
 function Register() {
 	const [firstName, setFirstName] = useState("");
 	const [mobileNum, setMobileNum] = useState("");
 	const [password, setPassword] = useState("");
 	const [password2, setPassword2] = useState("");
-	const [error, setError] = useState("");
+	const [mobileNumError, setMobileNumError] = useState(""); // Separate error for mobile number
+	const [passwordError, setPasswordError] = useState(""); // Separate error for password
 	const [canSubmit, setCanSubmit] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
@@ -17,9 +16,9 @@ function Register() {
 	// Function to check if passwords match
 	const checkPasswordsMatch = () => {
 		if (password && password2 && password !== password2) {
-			setError("Passwords do not match");
+			setPasswordError("Passwords do not match");
 		} else {
-			setError((prevError) => (prevError === "Passwords do not match" ? "" : prevError));
+			setPasswordError(""); // Clear error if passwords match
 		}
 	};
 
@@ -27,9 +26,9 @@ function Register() {
 	const validateMobileNum = (value) => {
 		const regex = /^09\d{9}$/;
 		if (!regex.test(value)) {
-			setError("Please enter an 11-digit number starting with '09'.");
+			setMobileNumError("Please enter an 11-digit number starting with '09'.");
 		} else {
-			setError((prevError) => (prevError !== "Please enter an 11-digit number starting with '09'." ? prevError : ""));
+			setMobileNumError(""); // Clear error if valid
 		}
 	};
 
@@ -41,27 +40,30 @@ function Register() {
 
 	const handlePasswordChange = (e) => {
 		setPassword(e.target.value);
+		checkPasswordsMatch(); // Check password match every time password is updated
 	};
 
 	const handlePassword2Change = (e) => {
 		setPassword2(e.target.value);
+		checkPasswordsMatch(); // Check password match every time confirm password is updated
 	};
 
 	useEffect(() => {
 		checkPasswordsMatch();
 
 		// Check if all required fields are filled
-		if (firstName && mobileNum && password && password2 && !error) {
+		if (firstName && mobileNum && password && password2 && !mobileNumError && !passwordError) {
 			setCanSubmit(true);
 		} else {
 			setCanSubmit(false);
 		}
-	}, [firstName, mobileNum, password, password2, error]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [firstName, mobileNum, password, password2, mobileNumError, passwordError]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		if (!canSubmit) return;
 		setLoading(true);
-		// Show SweetAlert2 loading spinner
 
 		try {
 			const res = await api.post("/api/register/", {
@@ -73,9 +75,7 @@ function Register() {
 			});
 
 			if (res.status === 201) {
-				// Close the SweetAlert2 loading spinner
-
-				// Navigate to login page with state
+				// Navigate to login page with success message
 				navigate("/login", { state: { successMessage: "You have been registered successfully." } });
 			} else {
 				Swal.fire({
@@ -87,16 +87,13 @@ function Register() {
 			}
 		} catch (error) {
 			let errorMessage = "Registration failed";
-
 			if (error.response) {
-				// If the error response contains specific error messages, display them
 				if (error.response.data && typeof error.response.data === "object") {
 					errorMessage = Object.values(error.response.data).join(" ");
 				} else if (error.response.data && error.response.data.detail) {
 					errorMessage = error.response.data.detail;
 				}
 			}
-
 			Swal.fire({
 				title: "Error!",
 				text: errorMessage,
@@ -115,114 +112,140 @@ function Register() {
 				className="p-3 flex items-center fixed top-14">
 				<ArrowBackIcon className="text-gray-800" />
 			</Link>
-			<div className="font-[sans-serif]">
-				<div className="bg-white h-screen">
-					<div className="bg-white rounded-xl sm:px-6 px-4 py-8 max-w-md w-full h-max max-lg:mx-auto">
-						<form onSubmit={handleSubmit}>
-							<div className="mb-8 pt-24">
-								<div className="flex flex-col items-center justify-center pt-12 mb-2">
-									<img
-										src={disasterIcon}
-										className="w-40"
-										alt=""
-									/>
-									<p className="text-gray-800 font-bold text-4xl">Register</p>
-								</div>
-							</div>
-
-							<div>
-								<div className="relative flex items-center">
+			<section className="bg-white h-screen py-24">
+				<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+					<a
+						href="#"
+						className="flex items-center mb-6 text-2xl font-semibold text-gray-900">
+						<img
+							className="w-8 h-8 mr-2"
+							src={logo}
+							alt="logo"
+						/>
+						Law Finder
+					</a>
+					<div className="w-full bg-white rounded-lg md:mt-0 sm:max-w-md xl:p-0">
+						<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+							<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+								Register your account
+							</h1>
+							<form
+								className="space-y-4 md:space-y-6"
+								onSubmit={handleSubmit}>
+								<div>
+									<label
+										htmlFor="firstName"
+										className="block mb-2 text-sm font-medium text-gray-900">
+										Full Name
+									</label>
 									<input
 										type="text"
+										name="firstName"
+										id="firstName"
+										className="bg-gray-50 text-gray-900 rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
+										placeholder="Enter your full name"
 										value={firstName}
 										onChange={(e) => setFirstName(e.target.value)}
 										required
-										className="w-full text-sm text-gray-800 border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
-										placeholder="Full Name"
 									/>
 								</div>
-							</div>
-
-							<div className="mt-2">
-								<div className="relative flex flex-col items-center">
+								<div>
+									<label
+										htmlFor="mobileNum"
+										className="block mb-2 text-sm font-medium text-gray-900">
+										Mobile Number
+									</label>
 									<input
-										type="text"
+										type="number"
+										name="mobileNum"
+										id="mobileNum"
+										className="bg-gray-50 text-gray-900 rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
+										placeholder="09XXXXXXXXX"
 										value={mobileNum}
 										onChange={handleMobileNumChange}
 										required
-										className={`w-full text-sm text-gray-800 border px-4 py-3 rounded-md outline-blue-600 ${
-											error.includes("Please enter an 11-digit number starting with '09'.")
-												? "border-red-500"
-												: "border-gray-300"
-										}`}
-										placeholder="Mobile Number"
-										maxLength="11"
 									/>
-									{error && error.includes("Please enter an 11-digit number starting with '09'.") && (
-										<p className="text-red-500 text-sm mt-2">{error}</p>
-									)}
+									{mobileNumError && <p className="text-red-600 text-xs">{mobileNumError}</p>}{" "}
+									{/* Display mobile number error */}
 								</div>
-							</div>
-
-							<div className="mt-2">
-								<div className="relative flex items-center">
+								<div>
+									<label
+										htmlFor="password"
+										className="block mb-2 text-sm font-medium text-gray-900">
+										Password
+									</label>
 									<input
 										type="password"
+										name="password"
+										id="password"
+										placeholder="••••••••"
+										className="bg-gray-50 text-gray-900 rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
 										value={password}
 										onChange={handlePasswordChange}
 										required
-										className="w-full text-sm text-gray-800 border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
-										placeholder="Password"
 									/>
+									{passwordError && <p className="text-red-600 text-sm">{passwordError}</p>}{" "}
+									{/* Display password error */}
 								</div>
-							</div>
-
-							<div className="mt-2">
-								<div className="relative flex items-center">
+								<div>
+									<label
+										htmlFor="password2"
+										className="block mb-2 text-sm font-medium text-gray-900">
+										Confirm Password
+									</label>
 									<input
 										type="password"
+										name="password2"
+										id="password2"
+										placeholder="••••••••"
+										className="bg-gray-50 text-gray-900 rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
 										value={password2}
 										onChange={handlePassword2Change}
 										required
-										className="w-full text-sm text-gray-800 border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
-										placeholder="Confirm Password"
 									/>
 								</div>
-							</div>
 
-							{error && !error.includes("Please enter an 11-digit number starting with '09'.") && (
-								<p className="text-red-500 mt-2 text-xs">{error}</p>
-							)}
-
-							<div className="flex flex-col items-center justify-between mt-4">
 								<button
 									type="submit"
-									disabled={!canSubmit || loading}
-									className={`px-6 py-2 w-full mb-4 text-white font-semibold rounded-md transition-colors ${
-										canSubmit ? "bg-blue-600 hover:bg-blue-700" : "bg-red-600 cursor-not-allowed"
-									}`}>
+									className={`w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+										!canSubmit || loading ? "opacity-50 cursor-not-allowed" : ""
+									}`}
+									disabled={!canSubmit || loading}>
 									{loading ? (
-										<>
-											<HourglassBottomIcon className="animate-spin h-5 w-5 mr-3 text-white" />
-											Validating...
-										</>
+										<svg
+											className="w-5 h-5 text-white animate-spin"
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24">
+											<circle
+												className="opacity-25"
+												cx="12"
+												cy="12"
+												r="10"
+												stroke="currentColor"
+												strokeWidth="4"></circle>
+											<path
+												className="opacity-75"
+												fill="currentColor"
+												d="M4 12a8 8 0 018-8v3.08a5 5 0 00-4.91 4.91H4z"></path>
+										</svg>
 									) : (
 										"Register"
 									)}
 								</button>
-								<p>
-									Already have an account?
+								<p className="text-sm font-light text-gray-500">
+									Already have an account?{" "}
 									<Link
 										to="/login"
-										className="text-blue-500 hover:underline ml-2">
+										className="font-medium text-green-600 hover:underline">
 										Login here
 									</Link>
 								</p>
-							</div>
-						</form>
+							</form>
+						</div>
 					</div>
 				</div>
-			</div>
+			</section>
 		</>
 	);
 }
