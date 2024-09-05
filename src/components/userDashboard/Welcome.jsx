@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";import law from "../../assets/img/law.png";
-
 function Welcome() {
 	return (
 		<>
@@ -30,7 +29,9 @@ function Welcome() {
 				animate={{ opacity: 1, x: 0 }}
 				transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.2 }}>
 				<p className="font-bold text-xl">Explore, Browse, and Ask</p>
-				<p className="text-xs">Feel free to browse about law related to Violence Against Women (VAWC).</p>
+				<p className="text-xs">
+					Feel free to browse about law related to Anti-Violence Against Women and their Children (VAWC).
+				</p>
 			</motion.div>
 		</>
 	);

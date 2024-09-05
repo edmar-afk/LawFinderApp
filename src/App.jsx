@@ -6,6 +6,7 @@ import Register from "./routes/Register";
 import Homepage from "./routes/Homepage";
 import UserDashboard from "./routes/UserDashboard";
 import Profile from "./routes/Profile";
+import Chatbot from "./routes/Chatbot";
 
 function Logout() {
 	localStorage.clear();
@@ -71,7 +72,10 @@ function App() {
 							path="/profile"
 							element={<Profile />}
 						/>
-
+						<Route
+							path="/chatbot"
+							element={<Chatbot />}
+						/>
 						<Route
 							path="/logout"
 							element={<Logout />}
