@@ -10,7 +10,7 @@ function Header() {
 				<Link to={"/logout"}>
 					<DoorFrontOutlinedIcon className="text-red-600" />
 				</Link>
-				<p>{userData ? userData.first_name : "Visitor"}</p>
+				<p>{userData ? userData.first_name : "Guest"}</p>
 			</div>
 		</>
 	);

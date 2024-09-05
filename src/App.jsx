@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Register from "./routes/Register";
 import Homepage from "./routes/Homepage";
 import UserDashboard from "./routes/UserDashboard";
+import Profile from "./routes/Profile";
 
 function Logout() {
 	localStorage.clear();
@@ -65,6 +66,10 @@ function App() {
 						<Route
 							path="/user-dashboard"
 							element={<UserDashboard />}
+						/>
+						<Route
+							path="/profile"
+							element={<Profile />}
 						/>
 
 						<Route
