@@ -28,12 +28,7 @@ function Homepage() {
 								role="button">
 								Login
 							</Link>
-							<Link
-								to={'/user-dashboard'}
-								className="inline-flex items-center mx-4 justify-center w-full px-2 py-3 text-sm font-bold text-green-600 transition-all duration-200 bg-gray-100 border-2 border-green-600 sm:w-auto rounded-xl"
-								role="button">
-								Guest Login
-							</Link>
+							
 						</div>
 					</div>
 				</div>

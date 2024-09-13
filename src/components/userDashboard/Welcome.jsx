@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";import law from "../../assets/img/law.png";
+import { motion } from "framer-motion";
+import law from "../../assets/img/icon.png";
+
 function Welcome() {
 	return (
 		<>
