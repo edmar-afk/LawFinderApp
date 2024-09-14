@@ -6,7 +6,7 @@ function Header() {
     
 	return (
 		<>
-			<div className="fixed w-full top-0 bg-white flex sm:items-center justify-between py-3 px-4 border-b-2 border-gray-200">
+			<div className="fixed w-full top-0 pt-12 bg-white flex sm:items-center justify-between py-3 px-4 border-b-2 border-gray-200">
 				<div className="relative flex items-center space-x-4">
 					<div className="relative">
 						<SmartToyIcon
