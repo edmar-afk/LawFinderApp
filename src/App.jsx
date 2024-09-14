@@ -7,6 +7,8 @@ import Homepage from "./routes/Homepage";
 import UserDashboard from "./routes/UserDashboard";
 import Profile from "./routes/Profile";
 import Chatbot from "./routes/Chatbot";
+import SafeSpacesAct from "./routes/SafeSpacesAct";
+import Vawc from "./routes/Vawc";
 
 function Logout() {
 	localStorage.clear();
@@ -75,6 +77,14 @@ function App() {
 						<Route
 							path="/chatbot"
 							element={<Chatbot />}
+						/>
+						<Route
+							path="/safeSpaces"
+							element={<SafeSpacesAct />}
+						/>
+						<Route
+							path="/vawc"
+							element={<Vawc />}
 						/>
 						<Route
 							path="/logout"

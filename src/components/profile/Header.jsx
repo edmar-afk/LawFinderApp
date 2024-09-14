@@ -39,7 +39,7 @@ function Header() {
 							initial={{ opacity: 0, x: -50 }}
 							animate={{ opacity: 1, x: 0 }}
 							transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.4 }}>
-							<Link className="text-xs bg-red-600 text-white py-1 px-4 rounded-2xl">Logout</Link>
+							<Link to={'/logout'} className="text-xs bg-red-600 text-white py-1 px-4 rounded-2xl">Logout</Link>
 						</motion.div>
 					</motion.div>
 				</motion.div>

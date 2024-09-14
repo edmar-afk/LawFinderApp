@@ -28,7 +28,7 @@ function Header() {
 						<ArrowBackIosIcon />
 					</button>
 					<Link
-						to={"/"}
+						to={"/chatbot"}
 						className="inline-flex items-center justify-center rounded-lg border h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none">
 						<RestoreIcon />
 					</Link>
