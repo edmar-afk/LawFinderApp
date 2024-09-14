@@ -9,6 +9,10 @@ import Profile from "./routes/Profile";
 import Chatbot from "./routes/Chatbot";
 import SafeSpacesAct from "./routes/SafeSpacesAct";
 import Vawc from "./routes/Vawc";
+import AntiRape from "./routes/AntiRape";
+import AntiChildAbuse from "./routes/AntiChildAbuse";
+import Harrassment from "./routes/Harrassment";
+import Trafficking from "./routes/Trafficking";
 
 function Logout() {
 	localStorage.clear();
@@ -85,6 +89,22 @@ function App() {
 						<Route
 							path="/vawc"
 							element={<Vawc />}
+						/>
+						<Route
+							path="/anti-rape"
+							element={<AntiRape />}
+						/>
+						<Route
+							path="/child-abuse"
+							element={<AntiChildAbuse />}
+						/>
+						<Route
+							path="/harrassment"
+							element={<Harrassment />}
+						/>
+						<Route
+							path="/trafficking"
+							element={<Trafficking />}
 						/>
 						<Route
 							path="/logout"

@@ -16,7 +16,7 @@ function Header() {
 					</div>
 					<div className="flex flex-col leading-tight">
 						<div className="text-sm mt-1 flex items-center">
-							<span className="text-gray-700 mr-3">Law Finder Chat Bot</span>
+							<span className="text-gray-700 mr-3">VAWC In-charge Chat Bot</span>
 						</div>
 						<span className="text-xs text-gray-600">Feel free to ask related to VAWC</span>
 					</div>
