@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */import { motion } from "framer-motion";
+/* eslint-disable react/no-unescaped-entities */ import { motion } from "framer-motion";
 import policeBg from "../../assets/svg/police.svg";
 import CallIcon from "@mui/icons-material/Call";
 
@@ -44,33 +44,30 @@ function Contact() {
 						transition={animationSettings(0.5).transition}>
 						Call the Authority
 					</motion.p>
-					<motion.a
-						href="tel:09123456789"
+					<motion.p
 						className="text-xs font-extralight mt-2 flex items-center"
 						initial={animationSettings(0.6).initial}
 						animate={animationSettings(0.6).animate}
 						transition={animationSettings(0.6).transition}>
 						<CallIcon fontSize="small" />
 						<span className="ml-1">09123456789</span>
-					</motion.a>
-					<motion.a
-						href="tel:09123456789"
+					</motion.p>
+					<motion.p
 						className="text-xs font-extralight mt-2 flex items-center"
 						initial={animationSettings(0.7).initial}
 						animate={animationSettings(0.7).animate}
 						transition={animationSettings(0.7).transition}>
 						<CallIcon fontSize="small" />
 						<span className="ml-1">09123456789</span>
-					</motion.a>
-					<motion.a
-						href="tel:09123456789"
+					</motion.p>
+					<motion.p
 						className="text-xs font-extralight mt-2 flex items-center"
 						initial={animationSettings(0.8).initial}
 						animate={animationSettings(0.8).animate}
 						transition={animationSettings(0.8).transition}>
 						<CallIcon fontSize="small" />
 						<span className="ml-1">09123456789</span>
-					</motion.a>
+					</motion.p>
 				</motion.div>
 			</motion.div>
 
