@@ -1,9 +1,9 @@
-/* eslint-disable react/no-unescaped-entities */ import SmartToyIcon from "@mui/icons-material/SmartToy";import RestoreIcon from "@mui/icons-material/Restore";
+/* eslint-disable react/no-unescaped-entities */ import SmartToyIcon from "@mui/icons-material/SmartToy";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function Header() {
-    const navigate = useNavigate();
-    
+	const navigate = useNavigate();
+
 	return (
 		<>
 			<div className="fixed w-full top-0 pt-12 bg-white flex sm:items-center justify-between py-3 px-4 border-b-2 border-gray-200">
@@ -27,11 +27,6 @@ function Header() {
 						className="inline-flex items-center justify-center rounded-lg border h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none">
 						<ArrowBackIosIcon />
 					</button>
-					<Link
-						to={"/chatbot"}
-						className="inline-flex items-center justify-center rounded-lg border h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none">
-						<RestoreIcon />
-					</Link>
 				</div>
 			</div>
 		</>
