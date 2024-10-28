@@ -2,51 +2,46 @@ import { useState, useEffect, useRef } from "react";import SmartToyIcon from "@m
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MessageIcon from "@mui/icons-material/Message";
 import api from "../../assets/api";
+import Faqs from "./Faqs";
 
 function Messages() {
-	// State to store messages, input value, and typing status
 	const [messages, setMessages] = useState([]);
 	const [inputValue, setInputValue] = useState("");
-	const [typing, setTyping] = useState(false); // State to manage typing animation
-	const messagesEndRef = useRef(null); // Reference to the end of the message container
+	const [typing, setTyping] = useState(false);
+	const messagesEndRef = useRef(null);
 
-	// Function to handle message submission
-	const handleSubmit = async () => {
-		if (!inputValue.trim()) return;
+	const handleSubmit = async (messageText) => {
+		const message = messageText || inputValue;
+		if (!message.trim()) return;
 
-		// Add the user's message to the message list
-		const newMessages = [...messages, { sender: "user", text: inputValue }];
+		const newMessages = [...messages, { sender: "user", text: message }];
 		setMessages(newMessages);
-
-		// Show typing animation
 		setTyping(true);
 
 		try {
-			// Simulate a 1-second delay before sending the message
 			setTimeout(async () => {
-				// Send the message to the chatbot API
-				const response = await api.post("/api/chatbot/", { question: inputValue });
+				const response = await api.post("/api/chatbot/", { question: message });
 				const chatbotResponse = response.data.answer;
 
-				// Add the chatbot's response to the message list and hide typing animation
 				setMessages((prevMessages) => [...prevMessages, { sender: "chatbot", text: chatbotResponse }]);
 				setTyping(false);
-			}, 1000); // 1 second delay before showing chatbot response
+			}, 1000);
 		} catch (error) {
 			console.error("Error fetching chatbot response:", error);
-			setTyping(false); // Hide typing animation in case of error
+			setTyping(false);
 		}
 
-		// Clear the input field after submission
 		setInputValue("");
 	};
 
-	// Function to scroll to the bottom of the messages
+	const handleQuestionClick = (question) => {
+		handleSubmit(question);
+	};
+
 	const scrollToBottom = () => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 	};
 
-	// Scroll to the bottom whenever the messages array changes
 	useEffect(() => {
 		scrollToBottom();
 	}, [messages]);
@@ -56,8 +51,7 @@ function Messages() {
 			<div
 				id="messages"
 				className="flex flex-col space-y-4 p-3 overflow-y-auto mb-24 mt-24"
-				style={{ maxHeight: "75vh" }} // Ensure the message area has a maximum height
-			>
+				style={{ maxHeight: "75vh" }}>
 				{messages.map((msg, index) => (
 					<div
 						key={index}
@@ -88,7 +82,6 @@ function Messages() {
 					</div>
 				))}
 
-				{/* Show typing animation */}
 				{typing && (
 					<div className="flex items-end">
 						<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
@@ -100,11 +93,10 @@ function Messages() {
 					</div>
 				)}
 
-				{/* Reference to scroll to */}
+				<Faqs onQuestionClick={handleQuestionClick} />
 				<div ref={messagesEndRef} />
 			</div>
 
-			{/* Input area */}
 			<div className="fixed w-full bottom-2 pt-4 mb-2 sm:mb-0 px-2">
 				<div className="relative flex">
 					<span className="absolute inset-y-0 flex items-center">
@@ -119,17 +111,16 @@ function Messages() {
 						placeholder="Write your message!"
 						className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 py-3"
 						value={inputValue}
-						onChange={(e) => setInputValue(e.target.value)} // Update input field
+						onChange={(e) => setInputValue(e.target.value)}
 						onKeyPress={(e) => {
-							if (e.key === "Enter") handleSubmit(); // Submit on pressing Enter
+							if (e.key === "Enter") handleSubmit();
 						}}
 					/>
 					<div className="right-0 items-center inset-y-0 flex">
 						<button
 							type="button"
 							className="inline-flex items-center justify-center px-4 py-3 transition duration-500 ease-in-out text-white bg-green-500 hover:bg-green-400 focus:outline-none"
-							onClick={handleSubmit} // Handle click event to submit message
-						>
+							onClick={() => handleSubmit()}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 20 20"

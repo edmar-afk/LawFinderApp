@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Header from "../components/chatbot/Header";
 import BotPress from "./BotPress";
-
+import Messages from '../components/chatbot/Messages'
 function Chatbot() {
 	const ballVariants = {
 		bounce: {
@@ -35,7 +35,7 @@ function Chatbot() {
 		<>
 			<div className="flex-1 p:2 sm:p-6 justify-end flex flex-col h-full">
 				<Header />
-				<div className="flex flex-col justify-center items-center -z-50 mt-44">
+				{/* <div className="flex flex-col justify-center items-center -z-50 mt-44">
 					<div className="flex space-x-4">
 						{balls.map((ball, index) => (
 							<motion.div
@@ -65,10 +65,11 @@ function Chatbot() {
 						))}
 					</div>
 					<p className="mt-4 text-lg">Loading chatbot, please wait...</p>
-				</div>
-				<div className="my-8">
+				</div> */}
+				{/* <div className="my-8">
 					<BotPress />
-				</div>
+				</div> */}
+				<div><Messages/></div>
 			</div>
 		</>
 	);
