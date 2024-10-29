@@ -50,7 +50,7 @@ function Messages() {
 		<div>
 			<div
 				id="messages"
-				className="flex flex-col space-y-4 p-3 overflow-y-auto mb-24 mt-24"
+				className="flex flex-col space-y-4 p-3 overflow-y-auto mb-96 mt-24"
 				style={{ maxHeight: "75vh" }}>
 				{messages.map((msg, index) => (
 					<div
