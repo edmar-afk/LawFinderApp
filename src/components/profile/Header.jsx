@@ -15,7 +15,7 @@ function Header() {
 					className="flex items-center">
 					<AssignmentIndIcon
 						sx={{ fontSize: 120 }}
-						className="text-green-600"
+						className="text-purple-600"
 					/>
 					<motion.div
 						initial={{ opacity: 0, x: -50 }}

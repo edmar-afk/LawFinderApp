@@ -5,7 +5,7 @@ function Welcome() {
 	return (
 		<>
 			<motion.div
-				className="bg-green-700 w-full text-white rounded-2xl flex flex-row justify-between items-center p-2"
+				className="bg-purple-700 w-full text-white rounded-2xl flex flex-row justify-between items-center p-2"
 				initial={{ opacity: 0, x: -50 }}
 				animate={{ opacity: 1, x: 0 }}
 				transition={{ type: "spring", stiffness: 100, damping: 15 }}>

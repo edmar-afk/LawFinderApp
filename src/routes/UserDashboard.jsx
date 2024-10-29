@@ -8,7 +8,7 @@ function UserDashboard() {
 			<div className="bg-white px-4">
 				<Header />
                 <Welcome />
-                <Search />
+               
                 <LawLists/>
 			</div>
 			<BottomNav />

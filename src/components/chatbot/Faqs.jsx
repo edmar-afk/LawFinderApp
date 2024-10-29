@@ -20,7 +20,7 @@ function Faqs({ onQuestionClick }) {
 					{/* Conditionally render the question based on whether it's in hiddenQuestions */}
 					{!hiddenQuestions.includes(choice.question) && (
 						<p
-							className="bg-green-400 w-fit rounded-lg py-0.5 px-2 text-white text-xs cursor-pointer"
+							className="bg-purple-400 w-fit rounded-lg py-0.5 px-2 text-white text-xs cursor-pointer"
 							onClick={() => handleQuestionClick(choice.question)}>
 							{choice.question}
 						</p>

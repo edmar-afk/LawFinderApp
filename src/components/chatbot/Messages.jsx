@@ -60,12 +60,12 @@ function Messages() {
 							<div className="flex items-end justify-end">
 								<div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
 									<div>
-										<span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-green-600 text-white">
+										<span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-purple-600 text-white">
 											{msg.text}
 										</span>
 									</div>
 								</div>
-								<AccountCircleIcon className="order-2 text-green-600" />
+								<AccountCircleIcon className="order-2 text-purple-600" />
 							</div>
 						) : (
 							<div className="flex items-end">
@@ -76,7 +76,7 @@ function Messages() {
 										</span>
 									</div>
 								</div>
-								<SmartToyIcon className="text-green-600" />
+								<SmartToyIcon className="text-purple-600" />
 							</div>
 						)}
 					</div>
@@ -89,7 +89,7 @@ function Messages() {
 								<span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">Typing...</span>
 							</div>
 						</div>
-						<SmartToyIcon className="text-green-600" />
+						<SmartToyIcon className="text-purple-600" />
 					</div>
 				)}
 
@@ -119,7 +119,7 @@ function Messages() {
 					<div className="right-0 items-center inset-y-0 flex">
 						<button
 							type="button"
-							className="inline-flex items-center justify-center px-4 py-3 transition duration-500 ease-in-out text-white bg-green-500 hover:bg-green-400 focus:outline-none"
+							className="inline-flex items-center justify-center px-4 py-3 transition duration-500 ease-in-out text-white bg-purple-500 hover:bg-purple-400 focus:outline-none"
 							onClick={() => handleSubmit()}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"

@@ -10,7 +10,7 @@ function Header() {
 				<div className="relative flex items-center space-x-4">
 					<div className="relative">
 						<SmartToyIcon
-							className="text-green-600"
+							className="text-purple-600"
 							fontSize="large"
 						/>
 					</div>

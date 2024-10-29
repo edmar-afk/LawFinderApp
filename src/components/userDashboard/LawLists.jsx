@@ -18,9 +18,9 @@ function LawLists() {
 							damping: 10,
 							delay: index * 0.1, // Slight delay for each item
 						}}>
-						<GavelOutlinedIcon className="text-green-700" />
+						<GavelOutlinedIcon className="text-purple-700" />
 						<div>
-							<h5 className="mb-2 text-sm font-semibold tracking-tight text-green-200">{law.title}</h5>
+							<h5 className="mb-2 text-sm font-semibold tracking-tight text-purple-200">{law.title}</h5>
 						</div>
 						<p className="mb-3 font-normal text-gray-500 text-xs">{law.subtitle}</p>
 						<Link
